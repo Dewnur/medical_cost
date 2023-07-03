@@ -1,6 +1,5 @@
 import pickle
 
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
@@ -10,6 +9,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeRegressor
 
 from settings import SAVE_MODELS, LOAD_MODELS, best_dt_filename, best_rf_filename, param_grid
+from utils import graph
 from utils.optimization import get_best_params
 
 if __name__ == '__main__':
@@ -75,16 +75,5 @@ if __name__ == '__main__':
     dt_indices = np.argsort(dt_importances)
     rf_indices = np.argsort(rf_importances)
 
-    plt.figure(figsize=(10, 6))
-    plt.title('Дерево решений | Feature Importances')
-    plt.barh(range(len(dt_indices)), dt_importances[dt_indices], color='b', align='center')
-    plt.yticks(range(len(dt_indices)), [features[i] for i in dt_indices])
-    plt.xlabel('Relative Importance')
-    plt.show()
-
-    plt.figure(figsize=(10, 6))
-    plt.title('Случайный лес | Feature Importances')
-    plt.barh(range(len(rf_indices)), rf_importances[rf_indices], color='b', align='center')
-    plt.yticks(range(len(rf_indices)), [features[i] for i in rf_indices])
-    plt.xlabel('Relative Importance')
-    plt.show()
+    graph.feature_importances(dt_indices, dt_importances, features, 'Дерево решений | Feature Importances')
+    graph.feature_importances(rf_indices, rf_importances, features, 'Случайный лес | Feature Importances')
