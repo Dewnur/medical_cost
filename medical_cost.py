@@ -65,9 +65,11 @@ if __name__ == '__main__':
     rf_predict = best_rf.predict(X_val)
 
     print(
-        f'Дерево решений\nr2_score: {r2_score(dt_predict, y_val)} | mean_squared_error: {mean_squared_error(dt_predict, y_val)}')
+        f'Дерево решений\nr2_score: {r2_score(dt_predict, y_val)} '
+        f'| mean_squared_error: {mean_squared_error(dt_predict, y_val)}')
     print(
-        f'Случайный лес\nr2_score: {r2_score(rf_predict, y_val)} | mean_squared_error: {mean_squared_error(rf_predict, y_val)}')
+        f'Случайный лес\nr2_score: {r2_score(rf_predict, y_val)} '
+        f'| mean_squared_error: {mean_squared_error(rf_predict, y_val)}')
 
     dt_importances = best_dt.feature_importances_
     rf_importances = best_rf.feature_importances_
@@ -75,5 +77,5 @@ if __name__ == '__main__':
     dt_indices = np.argsort(dt_importances)
     rf_indices = np.argsort(rf_importances)
 
-    graph.feature_importances(dt_indices, dt_importances, features, 'Дерево решений | Feature Importances')
-    graph.feature_importances(rf_indices, rf_importances, features, 'Случайный лес | Feature Importances')
+    graph.feature_importances(dt_indices, dt_importances, features, 'Дерево решений | Важность признаков')
+    graph.feature_importances(rf_indices, rf_importances, features, 'Случайный лес | Важность признаков')
